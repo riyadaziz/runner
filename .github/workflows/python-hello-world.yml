@@ -1,0 +1,42 @@
+name: Test Python Hello World
+
+# Trigger on push to the main branch
+on:
+  push:
+    branches:
+      - main  # Specify the branch for the workflow
+
+# Define the job that the runner will execute
+jobs:
+  run-hello-world:
+    # Use Ubuntu as the runner environment
+    runs-on: ubuntu-latest
+
+    # Steps for the runner
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'  # Specify the Python version (e.g., '3.8', '3.9')
+
+      # Step 3: Install dependencies (if you have any)
+      # Skipping this step for a Hello World script, but you can add it if needed
+      # - name: Install Dependencies
+      #   run: pip install -r requirements.txt
+
+      # Step 4: Run the Python Hello World script
+      - name: Run Hello World Script
+        run: |
+          python hello_world.py
+
+      # Step 5: Optional - Upload logs or any artifacts if needed
+      # - name: Upload Logs
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: hello-world-log
+      #     path: ./logs/
